@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Southern Robotics — Text Your Home. It Listens.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Southern Robotics. Text Your Home. It Listens.</title>
 <meta name="description" content="Southern Robotics is the AI your home deserves. Control everything through iMessage. No apps. No wake words. Engineered in Louisiana.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,15 +26,8 @@
 }
 
 /* ============================================================
-   CSS @property for counter animations
+   CSS counter display (JS handles the animation)
    ============================================================ */
-@property --num-164 { syntax: '<integer>'; initial-value: 0; inherits: false; }
-@property --num-93 { syntax: '<integer>'; initial-value: 0; inherits: false; }
-@property --num-0 { syntax: '<integer>'; initial-value: 0; inherits: false; }
-@property --num-46 { syntax: '<integer>'; initial-value: 0; inherits: false; }
-@property --num-57 { syntax: '<integer>'; initial-value: 0; inherits: false; }
-@property --num-29 { syntax: '<integer>'; initial-value: 0; inherits: false; }
-@property --num-3 { syntax: '<integer>'; initial-value: 0; inherits: false; }
 
 /* ============================================================
    RESET & BASE
@@ -45,7 +38,11 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  touch-action: pan-x pan-y;
+  -ms-touch-action: pan-x pan-y;
 }
+
+[id] { scroll-margin-top: 80px; }
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -108,7 +105,7 @@ input { font-family: inherit; }
 .nav-links a:hover { color: var(--white); }
 
 .nav-cta {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -128,23 +125,19 @@ input { font-family: inherit; }
 
 @media (max-width: 768px) {
   .nav-links { display: none; }
+  .nav-cta { padding: 10px 18px; }
 }
 
 /* ============================================================
    SECTION BASE
    ============================================================ */
 .section {
-  min-height: 100vh;
-  padding: clamp(100px, 14vh, 160px) clamp(20px, 6vw, 80px);
+  min-height: auto;
+  padding: clamp(80px, 12vh, 120px) clamp(20px, 6vw, 80px);
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-}
-
-.section-short {
-  min-height: auto;
-  padding: 9vh clamp(20px, 6vw, 80px);
+  justify-content: flex-start;
 }
 
 .eyebrow {
@@ -161,7 +154,7 @@ input { font-family: inherit; }
   font-weight: 700;
   text-transform: uppercase;
   line-height: 1.05;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 
 .section-headline .dim { color: var(--dim); }
@@ -172,7 +165,7 @@ input { font-family: inherit; }
   color: var(--dim);
   max-width: 540px;
   line-height: 1.7;
-  margin-bottom: 40px;
+  margin-bottom: 32px;
 }
 
 /* ============================================================
@@ -367,45 +360,18 @@ input { font-family: inherit; }
 }
 
 @media (max-width: 768px) {
-  .hero-stats { display: none; }
+  .hero-stats {
+    position: static;
+    margin-top: 48px;
+    justify-content: flex-start;
+    gap: 28px;
+  }
+  .hero-stat { text-align: left; }
+  .hero-stat-number { font-size: 22px; }
+  .hero-stat-label { max-width: 120px; }
 }
 
-/* Stat count-up animations */
-.count-164 { counter-reset: num var(--num-164); }
-.count-164::after { content: '$' counter(num) 'B'; }
-.count-164.counting { animation: count164 2s ease-out forwards; }
-
-.count-93 { counter-reset: num var(--num-93); }
-.count-93::after { content: counter(num) '%'; }
-.count-93.counting { animation: count93 2s ease-out forwards; }
-
-.count-0 { counter-reset: num var(--num-0); }
-.count-0::after { content: counter(num); }
-.count-0.counting { animation: count0 0.5s ease-out forwards; }
-
-.count-46 { counter-reset: num var(--num-46); }
-.count-46::after { content: counter(num) '%'; }
-.count-46.counting { animation: count46 2s ease-out forwards; }
-
-.count-57 { counter-reset: num var(--num-57); }
-.count-57::after { content: counter(num) '%'; }
-.count-57.counting { animation: count57 2s ease-out forwards; }
-
-.count-29 { counter-reset: num var(--num-29); }
-.count-29::after { content: counter(num) '%'; }
-.count-29.counting { animation: count29 2s ease-out forwards; }
-
-.count-3k { counter-reset: num var(--num-3); }
-.count-3k::after { content: '$' counter(num) 'K'; }
-.count-3k.counting { animation: count3 2s ease-out forwards; }
-
-@keyframes count164 { from { --num-164: 0; } to { --num-164: 164; } }
-@keyframes count93 { from { --num-93: 0; } to { --num-93: 93; } }
-@keyframes count0 { from { --num-0: 0; } to { --num-0: 0; } }
-@keyframes count46 { from { --num-46: 0; } to { --num-46: 46; } }
-@keyframes count57 { from { --num-57: 0; } to { --num-57: 57; } }
-@keyframes count29 { from { --num-29: 0; } to { --num-29: 29; } }
-@keyframes count3 { from { --num-3: 0; } to { --num-3: 3; } }
+/* Stat counters are now animated by JS */
 
 /* ============================================================
    PROBLEM SECTION
@@ -418,18 +384,22 @@ input { font-family: inherit; }
 
 .stat-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1px;
-  background: var(--ghost-border);
-  border-radius: 2px;
-  overflow: hidden;
-  margin-top: 48px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  margin-top: 32px;
   max-width: 780px;
 }
 
 .stat-cell {
   background: var(--canvas);
   padding: 32px 28px;
+  border-bottom: 1px solid rgba(240,240,250,0.06);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.stat-cell:hover {
+  background: rgba(240,240,250,0.03);
+  box-shadow: 0 0 20px rgba(240,240,250,0.04);
 }
 
 .stat-number {
@@ -447,72 +417,20 @@ input { font-family: inherit; }
   line-height: 1.5;
 }
 
-/* ============================================================
-   HOW IT WORKS SECTION
-   ============================================================ */
-#how-it-works {
-  background:
-    radial-gradient(ellipse 50% 55% at 5% 50%, rgba(40,60,160,0.10) 0%, transparent 70%),
-    var(--canvas);
-}
 
-.scenario-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  max-width: 600px;
-  margin-top: 8px;
-}
-
-.scenario-card {
-  padding: 28px 32px;
-  position: relative;
-}
-
-.scenario-tag {
-  position: absolute;
-  top: 16px;
-  right: 20px;
-  font-size: 8px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--faint);
-  background: var(--ghost-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 12px;
-  padding: 4px 12px;
-}
-
-.scenario-command {
-  font-size: clamp(18px, 2.5vw, 24px);
-  font-weight: 600;
-  color: var(--white);
-  margin-bottom: 12px;
-}
-
-.scenario-command::before { content: '"'; color: var(--faint); }
-.scenario-command::after { content: '"'; color: var(--faint); }
-
-.scenario-result {
-  font-size: 13px;
-  font-weight: 300;
-  color: var(--dim);
-  line-height: 1.65;
-}
 
 /* ============================================================
    iMESSAGE DEMO
    ============================================================ */
 .imessage-demo-wrap {
-  margin-top: 80px;
-  display: flex;
-  justify-content: center;
+  margin-top: 40px;
+  max-width: 500px;
+  width: 100%;
 }
 
 .imessage-phone {
   width: 100%;
-  max-width: 380px;
+  max-width: 500px;
   border-radius: 24px;
   overflow: hidden;
 }
@@ -554,8 +472,8 @@ input { font-family: inherit; }
 }
 
 .imessage-body {
-  padding: 20px 16px;
-  min-height: 320px;
+  padding: 24px 20px;
+  min-height: 360px;
   background: rgba(0,0,0,0.3);
   position: relative;
 }
@@ -637,82 +555,37 @@ input { font-family: inherit; }
     var(--canvas);
 }
 
-.versus-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: var(--ghost-border);
-  border-radius: 2px;
-  overflow: hidden;
-  margin-top: 48px;
-  max-width: 780px;
+.killer-lines {
+  max-width: 640px;
+  margin-top: 40px;
 }
 
-@media (max-width: 600px) {
-  .versus-grid { grid-template-columns: 1fr; }
+.killer-line {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 24px 0;
+  border-bottom: 1px solid rgba(240,240,250,0.06);
 }
 
-.versus-col {
-  background: var(--canvas);
-  padding: 32px 28px;
-}
+.killer-line:last-child { border-bottom: none; }
 
-.versus-label {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: var(--faint);
-  margin-bottom: 24px;
-}
-
-.versus-item {
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.5;
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(240,240,250,0.04);
-}
-
-.versus-item:last-child { border-bottom: none; }
-
-.versus-col.old .versus-item {
-  color: var(--dim);
-  text-decoration: line-through;
-  opacity: 0.6;
-}
-
-.versus-col.new .versus-item {
-  color: var(--white);
-}
-
-/* ============================================================
-   PRIVACY SECTION
-   ============================================================ */
-#privacy {
-  background: var(--canvas);
-}
-
-.privacy-callout {
-  border-left: 1px solid var(--ghost-border);
-  padding-left: 36px;
-  max-width: 620px;
-}
-
-.privacy-stat {
-  font-size: clamp(44px, 6vw, 72px);
-  font-weight: 700;
-  color: var(--white);
-  line-height: 1;
-  margin-bottom: 16px;
-}
-
-.privacy-text {
+.killer-old {
   font-size: clamp(13px, 1.4vw, 15px);
-  font-weight: 300;
-  color: var(--dim);
-  line-height: 1.7;
+  font-weight: 400;
+  color: var(--faint);
+  text-decoration: line-through;
+  text-decoration-color: rgba(240,240,250,0.2);
 }
+
+.killer-new {
+  font-size: clamp(16px, 1.8vw, 20px);
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: 0.3px;
+}
+
+
 
 /* ============================================================
    SERVICES SECTION
@@ -726,22 +599,21 @@ input { font-family: inherit; }
 .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1px;
-  background: var(--ghost-border);
-  border-radius: 2px;
-  overflow: hidden;
-  margin-top: 8px;
+  gap: 0;
+  margin-top: 32px;
   max-width: 900px;
 }
 
 .service-card {
   background: var(--canvas);
   padding: 36px 28px;
-  transition: background 0.3s;
+  border-bottom: 1px solid rgba(240,240,250,0.06);
+  transition: background 0.3s, box-shadow 0.3s;
 }
 
 .service-card:hover {
-  background: rgba(20,20,30,1);
+  background: rgba(240,240,250,0.02);
+  box-shadow: 0 0 20px rgba(240,240,250,0.03);
 }
 
 .service-icon {
@@ -773,17 +645,12 @@ input { font-family: inherit; }
     radial-gradient(ellipse 55% 50% at 50% 90%, rgba(120,80,30,0.10) 0%, transparent 70%),
     linear-gradient(to top, rgba(30,20,10,0.15) 0%, transparent 40%),
     var(--canvas);
-  text-align: center;
-  align-items: center;
 }
-
-#roots .section-headline { text-align: center; }
-#roots .section-body { text-align: center; max-width: 580px; }
 
 .state-tags {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 10px;
   margin-bottom: 32px;
 }
@@ -809,32 +676,8 @@ input { font-family: inherit; }
 }
 
 /* ============================================================
-   OPPORTUNITY SECTION
-   ============================================================ */
-#opportunity {
-  background:
-    radial-gradient(ellipse 50% 40% at 50% 95%, rgba(140,90,30,0.08) 0%, transparent 70%),
-    var(--canvas);
-}
-
-#opportunity .section-body {
-  max-width: 560px;
-  white-space: pre-line;
-}
-
-/* ============================================================
    EARLY ACCESS SECTION
    ============================================================ */
-#early-access {
-  background:
-    radial-gradient(ellipse 50% 55% at 50% 50%, rgba(30,50,140,0.12) 0%, transparent 70%),
-    var(--canvas);
-  text-align: center;
-  align-items: center;
-}
-
-#early-access .section-headline { text-align: center; }
-#early-access .section-body { text-align: center; max-width: 480px; }
 
 .access-form {
   display: flex;
@@ -842,6 +685,7 @@ input { font-family: inherit; }
   gap: 14px;
   max-width: 420px;
   width: 100%;
+  align-self: center;
 }
 
 .access-form input {
@@ -849,7 +693,7 @@ input { font-family: inherit; }
   border: 1px solid var(--ghost-border);
   border-radius: 8px;
   padding: 14px 18px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
   color: var(--white);
   outline: none;
@@ -874,10 +718,13 @@ input { font-family: inherit; }
   font-size: 10px;
   color: var(--faint);
   margin-top: 8px;
+  text-align: center;
 }
 
 .form-success {
   display: none;
+  align-self: center;
+  text-align: center;
 }
 
 .form-success.show {
@@ -913,7 +760,7 @@ input { font-family: inherit; }
 }
 
 .footer-logo {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 3px;
   color: var(--faint);
@@ -954,10 +801,15 @@ input { font-family: inherit; }
    RESPONSIVE REFINEMENTS
    ============================================================ */
 @media (max-width: 768px) {
-  .section { padding: 80px 20px; }
-  .section-short { padding: 60px 20px; }
+  .section { padding: 64px 20px; }
   .hero-ctas { flex-direction: column; align-items: flex-start; }
   .btn-text { margin-left: 0; }
+  .imessage-demo-wrap { max-width: 100%; margin-top: 32px; }
+  .stat-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 480px) {
+  .stat-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -982,12 +834,12 @@ input { font-family: inherit; }
 <section id="hero" class="section">
   <div class="starfield" id="starfield"></div>
   <div class="hero-content">
-    <div class="hero-eyebrow reveal">SOUTHERN ROBOTICS — EST. LOUISIANA</div>
+    <div class="hero-eyebrow reveal">SOUTHERN ROBOTICS · EST. LOUISIANA</div>
     <h1 class="hero-headline reveal reveal-d1">
       TEXT YOUR HOME.<br>
       <span class="line2">IT LISTENS.</span>
     </h1>
-    <p class="hero-sub reveal reveal-d2">No apps. No wake words. No shouting at the ceiling. Southern Robotics is the AI your home deserves — and you control it through iMessage.</p>
+    <p class="hero-sub reveal reveal-d2">No apps. No wake words. No shouting at the ceiling. Just text your home like you'd text a friend.</p>
     <div class="hero-ctas reveal reveal-d3">
       <a href="#early-access" class="btn-ghost">REQUEST ACCESS</a>
       <a href="#how-it-works" class="btn-text">See How It Works →</a>
@@ -995,15 +847,15 @@ input { font-family: inherit; }
   </div>
   <div class="hero-stats" id="heroStats">
     <div class="hero-stat reveal reveal-d4">
-      <div class="hero-stat-number count-164 stat-counter" data-count="164"></div>
+      <div class="hero-stat-number stat-counter" data-target="164" data-prefix="$" data-suffix="B"></div>
       <div class="hero-stat-label">Global Smart Home Market (2026)</div>
     </div>
     <div class="hero-stat reveal reveal-d5">
-      <div class="hero-stat-number count-93 stat-counter" data-count="93"></div>
+      <div class="hero-stat-number stat-counter" data-target="93" data-suffix="%"></div>
       <div class="hero-stat-label">US Homes Own Smart Devices</div>
     </div>
     <div class="hero-stat reveal reveal-d6">
-      <div class="hero-stat-number count-0 stat-counter" data-count="0"></div>
+      <div class="hero-stat-number stat-counter" data-target="0"></div>
       <div class="hero-stat-label">Competitors Doing This</div>
     </div>
   </div>
@@ -1017,62 +869,34 @@ input { font-family: inherit; }
   <h2 class="section-headline reveal reveal-d1">
     YOUR SMART HOME<br>ISN'T SMART.<br><span class="dim">IT'S COMPLICATED.</span>
   </h2>
-  <p class="section-body reveal reveal-d2">The average American owns 7 smart devices and 4 apps to manage them. Voice assistants mishear. Devices fall offline. Alexa forgot what you set last week. Nearly 1 in 3 smart home owners say the technology made their life more complicated, not less. We built the fix.</p>
+  <p class="section-body reveal reveal-d2">7 devices. 4 apps. Nothing talks to each other. You've tried asking nicely. You've tried yelling. Alexa still turns on the wrong lights.</p>
   <div class="stat-grid reveal reveal-d3" id="problemStats">
     <div class="stat-cell">
-      <div class="stat-number count-46 stat-counter" data-count="46"></div>
+      <div class="stat-number stat-counter" data-target="46" data-suffix="%"></div>
       <div class="stat-desc">experience Wi-Fi failures that take their devices offline</div>
     </div>
     <div class="stat-cell">
-      <div class="stat-number count-57 stat-counter" data-count="57"></div>
+      <div class="stat-number stat-counter" data-target="57" data-suffix="%"></div>
       <div class="stat-desc">worry about their data privacy with smart home devices</div>
     </div>
     <div class="stat-cell">
-      <div class="stat-number count-29 stat-counter" data-count="29"></div>
+      <div class="stat-number stat-counter" data-target="29" data-suffix="%"></div>
       <div class="stat-desc">say managing smart devices now takes more time than before</div>
     </div>
     <div class="stat-cell">
-      <div class="stat-number count-3k stat-counter" data-count="3"></div>
-      <div class="stat-desc">average invested in devices — with fragmented apps and no unified intelligence</div>
+      <div class="stat-number stat-counter" data-target="3" data-prefix="$" data-suffix="K"></div>
+      <div class="stat-desc">average invested in devices with fragmented apps and no unified intelligence</div>
     </div>
   </div>
-</section>
 
-<!-- ============================================================
-     3. HOW IT WORKS
-     ============================================================ -->
-<section id="how-it-works" class="section">
-  <div class="eyebrow reveal">HOW IT WORKS</div>
+  <!-- How It Works -->
+  <div class="eyebrow reveal" id="how-it-works" style="margin-top:64px">HOW IT WORKS</div>
   <h2 class="section-headline reveal reveal-d1">
     ONE TEXT.<br><span class="dim">EVERYTHING MOVES.</span>
   </h2>
-  <p class="section-body reveal reveal-d2">Southern Robotics connects to your lights, locks, thermostat, security system, and more. Then it answers through iMessage — the app already on your phone. No download. No account. No learning curve.</p>
-
-  <div class="scenario-cards">
-    <div class="scenario-card glass-card reveal reveal-d1">
-      <span class="scenario-tag">BEDTIME</span>
-      <div class="scenario-command">Goodnight</div>
-      <div class="scenario-result">Lights off throughout the house. Front door locked. Thermostat drops to 68°. Alarm armed. One word. Done.</div>
-    </div>
-    <div class="scenario-card glass-card reveal reveal-d2">
-      <span class="scenario-tag">ENTERTAINING</span>
-      <div class="scenario-command">Make it cozy</div>
-      <div class="scenario-result">Living room dims to 35%. Fireplace on. Jazz playing in the kitchen. Porch light on low. Your home, ready before your guests are.</div>
-    </div>
-    <div class="scenario-card glass-card reveal reveal-d3">
-      <span class="scenario-tag">SECURITY CHECK</span>
-      <div class="scenario-command">Is the garage closed?</div>
-      <div class="scenario-result">Yes — closed at 6:14 PM. Also, your front door has been unlocked since 3 PM. Want me to lock it?</div>
-    </div>
-    <div class="scenario-card glass-card reveal reveal-d4">
-      <span class="scenario-tag">MORNING</span>
-      <div class="scenario-command">Good morning</div>
-      <div class="scenario-result">Shades open gradually. Coffee maker on. Thermostat up to 72°. Today's weather: 74° and sunny in Lafayette.</div>
-    </div>
-  </div>
 
   <!-- iMessage Demo -->
-  <div class="imessage-demo-wrap reveal reveal-d3">
+  <div class="imessage-demo-wrap reveal reveal-d2">
     <div class="imessage-phone glass-card">
       <div class="imessage-header">
         <div class="imessage-avatar">SR</div>
@@ -1094,45 +918,27 @@ input { font-family: inherit; }
 <section id="contrast" class="section">
   <div class="eyebrow reveal">THE DIFFERENCE</div>
   <h2 class="section-headline reveal reveal-d1">
-    VOICE ASSISTANTS WERE<br>A GREAT IDEA.<br><span class="dim">THEY JUST STOPPED WORKING.</span>
+    VOICE ASSISTANTS WERE<br>A GREAT IDEA.<br><span class="dim">THEY JUST NEVER WORKED.</span>
   </h2>
-  <p class="section-body reveal reveal-d2">The top smart home forums are full of the same story: 'She used to understand me. Now nothing works.' Cloud outages. Exact phrasing required. Memory that resets. Always-on microphones. Data that belongs to Amazon, not you. We took a different road.</p>
-  <div class="versus-grid reveal reveal-d3">
-    <div class="versus-col old">
-      <div class="versus-label">VOICE ASSISTANTS</div>
-      <div class="versus-item">Wake word required every time</div>
-      <div class="versus-item">Exact phrasing or it fails</div>
-      <div class="versus-item">Cloud-dependent — outages kill your home</div>
-      <div class="versus-item">Always-on microphone in your living room</div>
-      <div class="versus-item">Your data lives on their servers</div>
-      <div class="versus-item">Breaks after software updates</div>
-      <div class="versus-item">One device at a time</div>
+  <div class="killer-lines reveal reveal-d2">
+    <div class="killer-line">
+      <span class="killer-old">Wake word. Exact phrasing. Hope it works.</span>
+      <span class="killer-new">Text what you mean. Done.</span>
     </div>
-    <div class="versus-col new">
-      <div class="versus-label">SOUTHERN ROBOTICS</div>
-      <div class="versus-item">Text like you'd text a friend</div>
-      <div class="versus-item">Natural language — say it however you'd say it</div>
-      <div class="versus-item">Local processing — works without internet</div>
-      <div class="versus-item">No microphone. iMessage only. You initiate.</div>
-      <div class="versus-item">Your data stays in your home</div>
-      <div class="versus-item">Remembers your home. Learns your routines.</div>
-      <div class="versus-item">Whole-home intelligence — one text moves everything</div>
+    <div class="killer-line">
+      <span class="killer-old">Always-on microphone in your living room.</span>
+      <span class="killer-new">No mic. iMessage only. You initiate.</span>
+    </div>
+    <div class="killer-line">
+      <span class="killer-old">Cloud-dependent. Outage kills your home.</span>
+      <span class="killer-new">Processes locally. Works without internet.</span>
+    </div>
+    <div class="killer-line">
+      <span class="killer-old">Your data on their servers.</span>
+      <span class="killer-new">Your data stays in your home.</span>
     </div>
   </div>
-</section>
 
-<!-- ============================================================
-     5. PRIVACY
-     ============================================================ -->
-<section id="privacy" class="section section-short">
-  <div class="eyebrow reveal">PRIVACY</div>
-  <h2 class="section-headline reveal reveal-d1">
-    YOUR HOME.<br>YOUR CONVERSATION.<br><span class="dim">NOBODY ELSE'S.</span>
-  </h2>
-  <div class="privacy-callout reveal reveal-d2">
-    <div class="privacy-stat">57%</div>
-    <p class="privacy-text">of smart home owners are concerned about data privacy. Amazon's core business is your data. Google's is too. Southern Robotics processes locally. Your conversations live in your home — not in a server farm in Virginia. We don't sell data. We don't run ads. We're in the business of your home running perfectly. Not in the business of knowing your business.</p>
-  </div>
 </section>
 
 <!-- ============================================================
@@ -1147,22 +953,22 @@ input { font-family: inherit; }
     <div class="service-card">
       <div class="service-icon">💡</div>
       <div class="service-title">LIGHTING CONTROL</div>
-      <div class="service-desc">Any room. Any mood. Any schedule. Dim the bedroom, brighten the kitchen, set a scene for guests — all in one message.</div>
+      <div class="service-desc">Any room. Any mood. Any schedule. Dim the bedroom, brighten the kitchen, set a scene for guests. All in one message.</div>
     </div>
     <div class="service-card">
       <div class="service-icon">🔒</div>
       <div class="service-title">SECURITY &amp; ACCESS</div>
-      <div class="service-desc">Lock and unlock doors. Check cameras. Arm the alarm. Know when someone arrives — and act before you think to ask.</div>
+      <div class="service-desc">Lock and unlock doors. Check cameras. Arm the alarm. Know when someone arrives. Act before you think to ask.</div>
     </div>
     <div class="service-card">
       <div class="service-icon">🌡️</div>
       <div class="service-title">CLIMATE INTELLIGENCE</div>
-      <div class="service-desc">Your temperature, set before you ask for it. Southern summers demand a smart thermostat — we give it a brain.</div>
+      <div class="service-desc">Your temperature, set before you ask for it. Southern summers demand a smart thermostat. We give it a brain.</div>
     </div>
     <div class="service-card">
       <div class="service-icon">🎵</div>
       <div class="service-title">ENTERTAINMENT</div>
-      <div class="service-desc">Music, TV, ambiance — all coordinated. Tell it what you want. It handles what's playing, where, and how loud.</div>
+      <div class="service-desc">Music, TV, ambiance. All coordinated. Tell it what you want. It handles what's playing, where, and how loud.</div>
     </div>
     <div class="service-card">
       <div class="service-icon">⚡</div>
@@ -1185,7 +991,7 @@ input { font-family: inherit; }
   <h2 class="section-headline reveal reveal-d1">
     ENGINEERED IN LOUISIANA.<br><span class="dim">BUILT FOR EVERYWHERE.</span>
   </h2>
-  <p class="section-body reveal reveal-d2">We come from the South — where home means something. Where a porch light on is a welcome, not a feature. Where you take care of what's yours. The South builds 59% of all new single-family homes in America. Silicon Valley's smart home vision was never built for us. Southern Robotics is.</p>
+  <p class="section-body reveal reveal-d2">Home means something here. The South builds 59% of all new homes in America. Silicon Valley's smart home vision was never built for us. We are.</p>
   <div class="state-tags reveal reveal-d3">
     <span class="state-tag">Louisiana</span>
     <span class="state-tag">Texas</span>
@@ -1198,34 +1004,11 @@ input { font-family: inherit; }
     <span class="state-tag">Alabama</span>
   </div>
   <div class="roots-tagline reveal reveal-d4">THE SOUTH BUILDS. WE MAKE IT INTELLIGENT.</div>
-</section>
 
-<!-- ============================================================
-     8. THE OPPORTUNITY
-     ============================================================ -->
-<section id="opportunity" class="section">
-  <div class="eyebrow reveal">THE OPPORTUNITY</div>
-  <h2 class="section-headline reveal reveal-d1">
-    THIS IS EARLY.<br><span class="dim">THAT'S THE POINT.</span>
-  </h2>
-  <div class="section-body reveal reveal-d2" style="max-width:560px">The smart home market is $164 billion and accelerating. Voice assistants just got worse. Big tech is losing trust. No one has built the premium, text-native, locally-processed alternative.
-
-Not yet.
-
-Southern Robotics is that product. It exists today. It runs on hardware customers already own. It works through the app already on their phone. It processes locally — no cloud, no data harvesting, no listening.
-
-The South builds 59% of all new single-family homes in America. Affluent Southern homeowners have invested $3,026 on smart home hardware and $498 a year on subscriptions — for devices they barely use because the interfaces are broken.
-
-We fix the interface. We charge for it. The unit economics are straightforward. The market is wide open.</div>
-</section>
-
-<!-- ============================================================
-     9. EARLY ACCESS
-     ============================================================ -->
-<section id="early-access" class="section">
-  <div class="eyebrow reveal">EARLY ACCESS</div>
-  <h2 class="section-headline reveal reveal-d1">BE FIRST IN THE SOUTH.</h2>
-  <p class="section-body reveal reveal-d2" style="text-align:center;max-width:480px">Southern Robotics is launching in select markets across Louisiana, Texas, Georgia, and the Carolinas. Join the waitlist — we'll text you when we're in your area.</p>
+  <!-- Early Access -->
+  <div class="eyebrow reveal" id="early-access" style="margin-top:64px;align-self:center">EARLY ACCESS</div>
+  <h2 class="section-headline reveal reveal-d1" style="text-align:center;align-self:center">BE FIRST IN THE SOUTH.</h2>
+  <p class="section-body reveal reveal-d2" style="text-align:center;max-width:480px;align-self:center">Launching in Louisiana, Texas, Georgia, and the Carolinas.</p>
   <form class="access-form reveal reveal-d3" id="accessForm">
     <input type="text" name="name" placeholder="Your Name" required autocomplete="name">
     <input type="tel" name="phone" placeholder="Phone Number" required autocomplete="tel">
@@ -1234,7 +1017,7 @@ We fix the interface. We charge for it. The unit economics are straightforward. 
   </form>
   <div class="form-success" id="formSuccess">
     <div class="form-success-msg">You're on the list. We'll be in touch.</div>
-    <div class="form-success-sub">SOUTHERN ROBOTICS — LAUNCHING SOON</div>
+    <div class="form-success-sub">SOUTHERN ROBOTICS · LAUNCHING SOON</div>
   </div>
 </section>
 
@@ -1244,11 +1027,7 @@ We fix the interface. We charge for it. The unit economics are straightforward. 
 <footer class="footer">
   <div class="footer-logo">SOUTHERN ROBOTICS</div>
   <div class="footer-tagline">Engineered in Louisiana · Your Home, Intelligent.</div>
-  <ul class="footer-links">
-    <li><a href="#how-it-works">How It Works</a></li>
-    <li><a href="#early-access">Waitlist</a></li>
-    <li><a href="mailto:hello@southernrobotics.ai">Contact</a></li>
-  </ul>
+
 </footer>
 
 <script>
@@ -1296,27 +1075,54 @@ We fix the interface. We charge for it. The unit economics are straightforward. 
 })();
 
 /* ============================================================
-   3. STAT COUNT-UP OBSERVER
+   3. SMOOTH STAT COUNT-UP (rAF-based)
    ============================================================ */
 (function initCountUp() {
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const duration = 2000;
   const counters = document.querySelectorAll('.stat-counter');
 
+  function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.target, 10) || 0;
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+
+    if (target === 0) { el.textContent = prefix + '0' + suffix; return; }
+
+    let start = null;
+    function step(ts) {
+      if (!start) start = ts;
+      const progress = Math.min((ts - start) / duration, 1);
+      const value = Math.round(easeOutCubic(progress) * target);
+      el.textContent = prefix + value + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReduced) {
-    counters.forEach(el => el.classList.add('counting'));
+    counters.forEach(el => {
+      const t = parseInt(el.dataset.target, 10) || 0;
+      el.textContent = (el.dataset.prefix || '') + t + (el.dataset.suffix || '');
+    });
     return;
   }
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('counting');
+        animateCounter(entry.target);
         observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.3 });
 
-  counters.forEach(el => observer.observe(el));
+  counters.forEach(el => {
+    el.textContent = (el.dataset.prefix || '') + '0' + (el.dataset.suffix || '');
+    observer.observe(el);
+  });
 })();
 
 /* ============================================================
@@ -1498,20 +1304,80 @@ We fix the interface. We charge for it. The unit economics are straightforward. 
 /* ============================================================
    6. FORM SUBMISSION HANDLER
    ============================================================ */
+
+/* Webhook URL is patched automatically by sr_tunnel_launcher.sh on each boot */
+const WEBHOOK_URL = 'https://recordings-phoenix-purchased-browse.trycloudflare.com/submit';
+
 (function initForm() {
   const form = document.getElementById('accessForm');
   const success = document.getElementById('formSuccess');
-  if (!form || !success) return;
+  const btn = form ? form.querySelector('button[type="submit"]') : null;
+  if (!form || !success || !btn) return;
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    form.style.display = 'none';
-    success.classList.add('show');
+
+    const name = form.querySelector('input[name="name"]').value.trim();
+    const phone = form.querySelector('input[name="phone"]').value.trim();
+
+    if (!name || !phone) return;
+
+    // Disable button while submitting
+    btn.disabled = true;
+    btn.textContent = 'SENDING...';
+
+    try {
+      if (!WEBHOOK_URL) {
+        throw new Error('Webhook not configured');
+      }
+
+      const resp = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone }),
+      });
+
+      if (!resp.ok && resp.status !== 200) {
+        throw new Error(`HTTP ${resp.status}`);
+      }
+
+      // Success
+      form.style.display = 'none';
+      success.classList.add('show');
+    } catch (err) {
+      console.error('Form submit error:', err);
+      btn.disabled = false;
+      btn.textContent = "LET'S TALK";
+      // Show inline error
+      let errMsg = form.querySelector('.form-error');
+      if (!errMsg) {
+        errMsg = document.createElement('div');
+        errMsg.className = 'form-error';
+        errMsg.style.cssText = 'color:rgba(255,100,100,0.85);font-size:13px;margin-top:8px;text-align:center;letter-spacing:0.08em;';
+        form.appendChild(errMsg);
+      }
+      errMsg.textContent = 'Something went wrong. Text us directly: southernrobotics.ai';
+    }
   });
 })();
 
 /* Add transition for iMessage body fade */
 document.getElementById('imessageBody').style.transition = 'opacity 0.4s ease';
+
+/* ============================================================
+   7. PREVENT PINCH-TO-ZOOM (iOS Safari ignores viewport meta)
+   ============================================================ */
+document.addEventListener('gesturestart', function(e) { e.preventDefault(); }, { passive: false });
+document.addEventListener('gesturechange', function(e) { e.preventDefault(); }, { passive: false });
+document.addEventListener('gestureend', function(e) { e.preventDefault(); }, { passive: false });
+
+/* Prevent double-tap zoom */
+let lastTouchEnd = 0;
+document.addEventListener('touchend', function(e) {
+  const now = Date.now();
+  if (now - lastTouchEnd <= 300) { e.preventDefault(); }
+  lastTouchEnd = now;
+}, { passive: false });
 </script>
 </body>
 </html>
